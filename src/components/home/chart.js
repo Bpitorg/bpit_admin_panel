@@ -7,7 +7,7 @@ import Title from './title';
 function createData(time, amount) {
   return { time, amount };
 }
-
+//dummy
 const data = [
   createData('00:00', 0),
   createData('03:00', 300),
