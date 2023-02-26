@@ -41,7 +41,7 @@ const config = {
 };
   useEffect(() => {
     axios
-      .get(`https://bpit-att.herokuapp.com/api/student/profile/search?query=`,config)
+      .get(`/student/profile/search?query=`,config)
       .then((res) => {
         const persons = res.data;
         setObjData(...persons);

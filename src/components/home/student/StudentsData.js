@@ -6,7 +6,7 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
-import axios from "axios";
+import axios from "../../../http/http";
 
 function createData(name, eroll, classRoll, branch, group, batch) {
   return { name, eroll, classRoll, branch, group, batch };
@@ -25,7 +25,7 @@ export default function StudentsData() {
   React.useEffect(() => {
     axios
       .get(
-        `https://bpit-att.herokuapp.com/api/student/profile/search?query=`,
+        `/student/profile/search?query=`,
         config
       )
       .then((res) => {

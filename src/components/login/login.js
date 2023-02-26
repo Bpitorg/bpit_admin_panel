@@ -9,7 +9,7 @@ import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
-import axios from 'axios';
+import http_lib from '../../http/http';
 import Loader from '../loader/loader';
 import { useNavigate } from 'react-router-dom'
 
@@ -30,12 +30,12 @@ function setCredentials(data) {
   localStorage.setItem('token', data.token)
   localStorage.setItem('name', data.name)
   localStorage.setItem('email', data.email)
-  axios.defaults.headers = { 'Authorization': `Token ${data.token}` }
+  http_lib.defaults.headers = { 'Authorization': `Token ${data.token}` } // check agar logout se hata rhe hai yanhi?
 }
 
 export default function Login() {
-  const[dark, setDark] = React.useState(false);
-  const[mode,setMode] = React.useState("Light");
+  const [dark, setDark] = React.useState(false);
+  const [mode, setMode] = React.useState("Light");
   var [loader, setLoader] = React.useState(false);
   var [error, setError] = React.useState('');
   let navigate = useNavigate();
@@ -50,7 +50,7 @@ export default function Login() {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
     setLoader(true)
-    axios.post('/auth/admin/login/', data)
+    http_lib.post('/auth/admin/login/', data)
       .then(res => {
         setCredentials(res.data)
         console.log(res.data)
@@ -63,9 +63,9 @@ export default function Login() {
         setError(JSON.stringify(err.response.data))
       })
   };
-  const modeHandler=()=>{
+  const modeHandler = () => {
     setDark(!dark);
-    if(dark===true) {setMode("Dark")}
+    if (dark === true) { setMode("Dark") }
     else setMode("Light")
   }
 
