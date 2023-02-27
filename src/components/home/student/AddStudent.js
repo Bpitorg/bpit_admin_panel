@@ -189,8 +189,8 @@ const AddStudent = () => {
           label="Group"
           onChange={(e) => setStudent_group(e.target.value)}
         >
-          <MenuItem value={"G2"}>G1</MenuItem>
-          <MenuItem value={"G1"}>G2</MenuItem>
+          <MenuItem value={"G1"}>G1</MenuItem>
+          <MenuItem value={"G2"}>G2</MenuItem>
         </Select>
       </FormControl>
       <br />
