@@ -5,6 +5,7 @@ import PersonAddAlt1Icon from '@mui/icons-material/PersonAddAlt1';
 import ListAltIcon from '@mui/icons-material/ListAlt';
 import ListStudent from './listStudent';
 import StudentsData from './StudentsData';
+import AddStudent from './AddStudent';
 
 export default function Student() {
   const [value, setValue] = React.useState('1');
@@ -24,6 +25,7 @@ export default function Student() {
           <Divider />
           {/* <TabPanel value='1'><ListStudent /></TabPanel> */}
           <TabPanel value='1'><StudentsData/></TabPanel>
+          <TabPanel value='2'><AddStudent /></TabPanel>
         </TabContext>
       </Paper>
     </Grid>

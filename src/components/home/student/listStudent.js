@@ -3,7 +3,8 @@ import {useState, useEffect} from 'react'
 import Box from "@mui/material/Box";
 import { DataGrid, GridToolbarQuickFilter } from "@mui/x-data-grid";
 import { useDemoData } from "@mui/x-data-grid-generator";
-import axios from "axios";
+import http_lib from "../../../http/http";
+
 
 
 function QuickSearchToolbar() {
@@ -40,7 +41,7 @@ const config = {
   },
 };
   useEffect(() => {
-    axios
+    http_lib
       .get(`/student/profile/search?query=`,config)
       .then((res) => {
         const persons = res.data;

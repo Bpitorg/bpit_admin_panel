@@ -7,6 +7,7 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import axios from "../../../http/http";
+import http_lib from "../../../http/http";
 
 function createData(name, eroll, classRoll, branch, group, batch) {
   return { name, eroll, classRoll, branch, group, batch };
@@ -23,7 +24,7 @@ export default function StudentsData() {
     },
   };
   React.useEffect(() => {
-    axios
+    http_lib
       .get(
         `/student/profile/search?query=`,
         config
