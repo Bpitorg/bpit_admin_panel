@@ -7,7 +7,7 @@ import {
   TextField,
 } from "@mui/material";
 import React, { useState } from "react";
-import "./style.css";
+import "../style.css";
 
 const AddStudent = () => {
   const [enrollment_number, setEnrollment_number] = useState("");
