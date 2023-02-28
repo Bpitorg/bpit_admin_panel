@@ -7,7 +7,7 @@ import {
   TextField,
 } from "@mui/material";
 import React, { useState } from "react";
-import { Form } from "react-router-dom";
+import "./style.css";
 
 const AddStudent = () => {
   const [enrollment_number, setEnrollment_number] = useState("");
@@ -85,176 +85,161 @@ const AddStudent = () => {
 
   return (
     <form onSubmit={formSubmitHandler}>
-      {/* NAME */}
-
-      <TextField
-        style={{ margin: "1rem" }}
-        id="outlined-basic"
-        label="Name"
-        variant="outlined"
-        value={name}
-        onChange={(e) => setName(e.target.value)}
-      />
-
-      {/* ENROLLMENT NUMBER */}
-
-      <TextField
-        style={{ margin: "1rem" }}
-        id="outlined-basic"
-        label="Enrollment Number"
-        variant="outlined"
-        value={enrollment_number}
-        onChange={(e) => setEnrollment_number(e.target.value)}
-      />
-
-      {/* CLASS ROLL NUMBER */}
-
-      <TextField
-        style={{ margin: "1rem" }}
-        id="outlined-basic"
-        label="Class Roll Number"
-        variant="outlined"
-        value={class_roll_number}
-        onChange={(e) => setClass_roll_number(e.target.value)}
-      />
+      <div className="row">
+        {/* NAME */}
+        <TextField
+          fullWidth
+          id="outlined-basic"
+          label="Name"
+          variant="outlined"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+        />
+        {/* ENROLLMENT NUMBER */}
+        <TextField
+          fullWidth
+          id="outlined-basic"
+          label="Enrollment Number"
+          variant="outlined"
+          value={enrollment_number}
+          onChange={(e) => setEnrollment_number(e.target.value)}
+        />
+        {/* CLASS ROLL NUMBER */}
+        <TextField
+          fullWidth
+          id="outlined-basic"
+          label="Class Roll Number"
+          variant="outlined"
+          value={class_roll_number}
+          onChange={(e) => setClass_roll_number(e.target.value)}
+        />
+      </div>
       <br />
-
-      {/* BATCH */}
-
-      <FormControl sx={{ margin: "1rem", minWidth: "8rem" }}>
-        <InputLabel id="demo-simple-select-label">Batch</InputLabel>
-        <Select
-          labelId="demo-simple-select-label"
-          id="demo-simple-select"
-          value={batch}
-          label="Batch"
-          onChange={(e) => setBatch(e.target.value)}
-        >
-          <MenuItem value={"2020"}>2020</MenuItem>
-          <MenuItem value={"2021"}>2021</MenuItem>
-          <MenuItem value={"2022"}>2022</MenuItem>
-          <MenuItem value={"2023"}>2023</MenuItem>
-          <MenuItem value={"2024"}>2024</MenuItem>
-          <MenuItem value={"2025"}>2025</MenuItem>
-          <MenuItem value={"2026"}>2026</MenuItem>
-          <MenuItem value={"2027"}>2027</MenuItem>
-        </Select>
-      </FormControl>
-
-      {/* BRANCH */}
-
-      <FormControl sx={{ margin: "1rem", minWidth: "8rem" }}>
-        <InputLabel id="demo-simple-select-label">Branch</InputLabel>
-        <Select
-          labelId="demo-simple-select-label"
-          id="demo-simple-select"
-          value={branch}
-          label="Branch"
-          onChange={(e) => setBranch(e.target.value)}
-        >
-          <MenuItem value={"CSE"}>CSE</MenuItem>
-          <MenuItem value={"IT"}>IT</MenuItem>
-          <MenuItem value={"ECE"}>ECE</MenuItem>
-          <MenuItem value={"EEE"}>EEE</MenuItem>
-          <MenuItem value={"AI"}>AI</MenuItem>
-          <MenuItem value={"DS"}>DS</MenuItem>
-        </Select>
-      </FormControl>
-
-      {/* SECTION */}
-
-      <FormControl sx={{ margin: "1rem", minWidth: "8rem" }}>
-        <InputLabel id="demo-simple-select-label">Section</InputLabel>
-        <Select
-          labelId="demo-simple-select-label"
-          id="demo-simple-select"
-          value={section}
-          label="Section"
-          onChange={(e) => setSection(e.target.value)}
-        >
-          <MenuItem value={"A"}>A</MenuItem>
-          <MenuItem value={"B"}>B</MenuItem>
-          <MenuItem value={"C"}>C</MenuItem>
-        </Select>
-      </FormControl>
-
-      {/* GROUP */}
-
-      <FormControl sx={{ margin: "1rem", minWidth: "8rem" }}>
-        <InputLabel id="demo-simple-select-label">Group</InputLabel>
-        <Select
-          labelId="demo-simple-select-label"
-          id="demo-simple-select"
-          value={student_group}
-          label="Group"
-          onChange={(e) => setStudent_group(e.target.value)}
-        >
-          <MenuItem value={"G1"}>G1</MenuItem>
-          <MenuItem value={"G2"}>G2</MenuItem>
-        </Select>
-      </FormControl>
+      <div className="row">
+        {/* BATCH */}
+        <FormControl fullWidth>
+          <InputLabel id="demo-simple-select-label">Batch</InputLabel>
+          <Select
+            labelId="demo-simple-select-label"
+            id="demo-simple-select"
+            value={batch}
+            label="Batch"
+            onChange={(e) => setBatch(e.target.value)}
+          >
+            <MenuItem value={"2020"}>2020</MenuItem>
+            <MenuItem value={"2021"}>2021</MenuItem>
+            <MenuItem value={"2022"}>2022</MenuItem>
+            <MenuItem value={"2023"}>2023</MenuItem>
+            <MenuItem value={"2024"}>2024</MenuItem>
+            <MenuItem value={"2025"}>2025</MenuItem>
+            <MenuItem value={"2026"}>2026</MenuItem>
+            <MenuItem value={"2027"}>2027</MenuItem>
+          </Select>
+        </FormControl>
+        {/* BRANCH */}
+        <FormControl fullWidth>
+          <InputLabel id="demo-simple-select-label">Branch</InputLabel>
+          <Select
+            labelId="demo-simple-select-label"
+            id="demo-simple-select"
+            value={branch}
+            label="Branch"
+            onChange={(e) => setBranch(e.target.value)}
+          >
+            <MenuItem value={"CSE"}>CSE</MenuItem>
+            <MenuItem value={"IT"}>IT</MenuItem>
+            <MenuItem value={"ECE"}>ECE</MenuItem>
+            <MenuItem value={"EEE"}>EEE</MenuItem>
+            <MenuItem value={"AI"}>AI</MenuItem>
+            <MenuItem value={"DS"}>DS</MenuItem>
+          </Select>
+        </FormControl>
+        {/* SECTION */}
+        <FormControl fullWidth>
+          <InputLabel id="demo-simple-select-label">Section</InputLabel>
+          <Select
+            labelId="demo-simple-select-label"
+            id="demo-simple-select"
+            value={section}
+            label="Section"
+            onChange={(e) => setSection(e.target.value)}
+          >
+            <MenuItem value={"A"}>A</MenuItem>
+            <MenuItem value={"B"}>B</MenuItem>
+            <MenuItem value={"C"}>C</MenuItem>
+          </Select>
+        </FormControl>
+        {/* GROUP */}
+        <FormControl fullWidth>
+          <InputLabel id="demo-simple-select-label">Group</InputLabel>
+          <Select
+            labelId="demo-simple-select-label"
+            id="demo-simple-select"
+            value={student_group}
+            label="Group"
+            onChange={(e) => setStudent_group(e.target.value)}
+          >
+            <MenuItem value={"G1"}>G1</MenuItem>
+            <MenuItem value={"G2"}>G2</MenuItem>
+          </Select>
+        </FormControl>
+      </div>
       <br />
-
-      {/* MOTHER'S NAME */}
-
-      <TextField
-        style={{ margin: "1rem" }}
-        id="outlined-basic"
-        label="Mother's Name"
-        variant="outlined"
-        value={mother_name}
-        onChange={(e) => setMother_name(e.target.value)}
-      />
-
-      {/* FATHER'S NAME */}
-
-      <TextField
-        style={{ margin: "1rem" }}
-        id="outlined-basic"
-        label="Father's Name"
-        variant="outlined"
-        value={father_name}
-        onChange={(e) => setFather_name(e.target.value)}
-      />
+      <div className="row">
+        {/* MOTHER'S NAME */}
+        <TextField
+          fullWidth
+          id="outlined-basic"
+          label="Mother's Name"
+          variant="outlined"
+          value={mother_name}
+          onChange={(e) => setMother_name(e.target.value)}
+        />
+        {/* FATHER'S NAME */}
+        <TextField
+          fullWidth
+          id="outlined-basic"
+          label="Father's Name"
+          variant="outlined"
+          value={father_name}
+          onChange={(e) => setFather_name(e.target.value)}
+        />
+      </div>
       <br />
-
       {/* STUDENT'S PHONE NUMBER */}
-
-      <TextField
-        style={{ margin: "1rem" }}
-        id="outlined-basic"
-        label="Student's Phone Number"
-        variant="outlined"
-        value={student_phone_number}
-        onChange={(e) => setStudent_phone_number(e.target.value)}
-      />
-
-      {/* EMAIL ID */}
-
-      <TextField
-        style={{ margin: "1rem" }}
-        id="outlined-basic"
-        label="Email Id"
-        variant="outlined"
-        value={student_email_id}
-        onChange={(e) => setStudent_email_id(e.target.value)}
-      />
-
-      {/* PARENT'S PHONE NUMBER */}
-
-      <TextField
-        style={{ margin: "1rem" }}
-        id="outlined-basic"
-        label="Parents Phone Number"
-        variant="outlined"
-        value={parent_phone_number}
-        onChange={(e) => setParent_phone_number(e.target.value)}
-      />
+      <div className="row">
+        <TextField
+          fullWidth
+          id="outlined-basic"
+          label="Student's Phone Number"
+          variant="outlined"
+          value={student_phone_number}
+          onChange={(e) => setStudent_phone_number(e.target.value)}
+        />
+        {/* EMAIL ID */}
+        <TextField
+          fullWidth
+          id="outlined-basic"
+          label="Email Id"
+          variant="outlined"
+          value={student_email_id}
+          onChange={(e) => setStudent_email_id(e.target.value)}
+        />
+        {/* PARENT'S PHONE NUMBER */}
+        <TextField
+          fullWidth
+          id="outlined-basic"
+          label="Parents Phone Number"
+          variant="outlined"
+          value={parent_phone_number}
+          onChange={(e) => setParent_phone_number(e.target.value)}
+        />
+      </div>
       <br />
       <Button
         sx={{ margin: "1rem", width: "10rem" }}
         variant="contained"
-        color="secondary"
+        color="success"
         type="submit"
       >
         SUBMIT
