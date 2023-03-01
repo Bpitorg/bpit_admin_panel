@@ -91,7 +91,7 @@ const AddStudent = () => {
       Authorization: "Token " + localStorage.getItem("token"),
     },
   };
- useEffect(() => {
+ http_lib(() => {
    axios.get(`http://localhost:8000/api/faculty/subjects/`, config).then((res) => {
      const data = res.data;
      console.log(data);
@@ -109,10 +109,12 @@ const AddStudent = () => {
     let formData = new FormData();
     filesToUpload.forEach((file) => formData.append("files", file));
 
-    fetch("/file/upload", {
-      method: "POST",
-      body: formData,
-    });
+    useEffect=(() => {
+      http_lib.get(`/api/course`, config).then((res) => {
+        const data = res.data;
+        console.log("1  ",data);
+      });
+    }, []);
   }
   return (
     <form onSubmit={formSubmitHandler}>
