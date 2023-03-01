@@ -1,12 +1,16 @@
 import {
   Button,
+  Divider,
   FormControl,
   InputLabel,
   MenuItem,
   Select,
   TextField,
 } from "@mui/material";
-import React, { useState } from "react";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
+import FileUpload from "react-mui-fileuploader";
+import http_lib from "../../../http/http";
 import "../style.css";
 
 const AddStudent = () => {
@@ -82,7 +86,34 @@ const AddStudent = () => {
       }, 3000);
     }
   };
+  const config = {
+    headers: {
+      Authorization: "Token " + localStorage.getItem("token"),
+    },
+  };
+ useEffect(() => {
+   axios.get(`http://localhost:8000/api/faculty/subjects/`, config).then((res) => {
+     const data = res.data;
+     console.log(data);
+   });
+ }, []);
+  const [filesToUpload, setFilesToUpload] = useState([]);
 
+  const handleFilesChange = (files) => {
+    // Update chosen files
+    setFilesToUpload([...files]);
+  };
+
+  const uploadFiles = () => {
+    // Create a form and post it to server
+    let formData = new FormData();
+    filesToUpload.forEach((file) => formData.append("files", file));
+
+    fetch("/file/upload", {
+      method: "POST",
+      body: formData,
+    });
+  }
   return (
     <form onSubmit={formSubmitHandler}>
       <div className="row">
@@ -246,6 +277,25 @@ const AddStudent = () => {
       </Button>
       <div style={{ margin: "1rem", background: "red" }}>{errorText}</div>
       <div style={{ margin: "1rem", background: "green" }}>{successText}</div>
+      <Divider orientation="horizontal" flexItem>
+        OR, UPLOAD FILES
+      </Divider>
+      <FileUpload
+        multiFile={true}
+        onFilesChange={handleFilesChange}
+        onContextReady={(context) => {}}
+        title="Upload data in bulk"
+        BannerProps={{ background: "black" }}
+      />
+      <Button
+        sx={{ margin: "1rem", width: "10rem" }}
+        variant="contained"
+        color="success"
+        type="submit"
+        onClick={uploadFiles}
+      >
+        UPLOAD
+      </Button>
     </form>
   );
 };
