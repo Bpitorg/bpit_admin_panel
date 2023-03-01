@@ -12,6 +12,7 @@ import Typography from '@mui/material/Typography';
 import http_lib from '../../http/http';
 import Loader from '../loader/loader';
 import { useNavigate } from 'react-router-dom'
+import { LOGIN_URL } from '../../constants/api_endpoints';
 
 function Copyright(props) {
   return (
@@ -50,7 +51,7 @@ export default function Login() {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
     setLoader(true)
-    http_lib.post('/auth/admin/login/', data)
+    http_lib.post(LOGIN_URL, data)
       .then(res => {
         setCredentials(res.data)
         console.log(res.data)
