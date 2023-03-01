@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/bpit_admin_panel/static/css/main.1d30746a.css",
+    "main.js": "/bpit_admin_panel/static/js/main.269eb6fd.js",
+    "static/js/787.cd3482a0.chunk.js": "/bpit_admin_panel/static/js/787.cd3482a0.chunk.js",
+    "index.html": "/bpit_admin_panel/index.html",
+    "main.1d30746a.css.map": "/bpit_admin_panel/static/css/main.1d30746a.css.map",
+    "main.269eb6fd.js.map": "/bpit_admin_panel/static/js/main.269eb6fd.js.map",
+    "787.cd3482a0.chunk.js.map": "/bpit_admin_panel/static/js/787.cd3482a0.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.1d30746a.css",
+    "static/js/main.269eb6fd.js"
+  ]
+}
