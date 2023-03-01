@@ -285,7 +285,6 @@ const AddStudent = () => {
         onFilesChange={handleFilesChange}
         onContextReady={(context) => {}}
         title="Upload data in bulk"
-        BannerProps={{ background: "black" }}
       />
       <Button
         sx={{ margin: "1rem", width: "10rem" }}
