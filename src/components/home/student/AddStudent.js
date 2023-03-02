@@ -89,10 +89,13 @@ const AddStudent = () => {
   const config = {
     headers: {
       Authorization: "Token " + localStorage.getItem("token"),
+      "Access-Control-Allow-Origin": "*",
+      "Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept",
+      'Content-Type': 'application/json'
     },
   };
- http_lib(() => {
-   axios.get(`http://localhost:8000/api/faculty/subjects/`, config).then((res) => {
+ useEffect(() => {
+   http_lib.get('/branch', config).then((res) => {
      const data = res.data;
      console.log(data);
    });
@@ -109,12 +112,10 @@ const AddStudent = () => {
     let formData = new FormData();
     filesToUpload.forEach((file) => formData.append("files", file));
 
-    useEffect=(() => {
-      http_lib.get(`/api/course`, config).then((res) => {
-        const data = res.data;
-        console.log("1  ",data);
-      });
-    }, []);
+    http_lib("/file/upload", {
+      method: "POST",
+      body: formData,
+    });
   }
   return (
     <form onSubmit={formSubmitHandler}>
