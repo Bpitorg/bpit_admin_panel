@@ -10,7 +10,8 @@ import DashboardIcon from '@mui/icons-material/Dashboard';
 import PeopleIcon from '@mui/icons-material/People';
 import Toolbar from '@mui/material/Toolbar';
 import IconButton from '@mui/material/IconButton';
-import BarChartIcon from '@mui/icons-material/BarChart';
+import FacultyIcon from '../../Assets/Icons/Faculty.svg';
+import ImageComponent from '../ImageComponent';
 import {
   Link as RouterLink,
 } from 'react-router-dom';
@@ -97,6 +98,6 @@ const mainListItems = (
   <React.Fragment>
     <ListItemLink to="dashboard" primary="Dashboard" icon={<DashboardIcon />} />
     <ListItemLink to="students" primary="Students" icon={<PeopleIcon />} />
-    <ListItemLink to="faculty" primary="Faculty" icon={<BarChartIcon />} />
+    <ListItemLink to="faculty" primary="Faculty" icon={<ImageComponent src={FacultyIcon} />} />
   </React.Fragment>
 );
