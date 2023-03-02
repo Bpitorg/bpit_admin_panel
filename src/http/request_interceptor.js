@@ -23,6 +23,11 @@ async function RequestInterceptor(request) {
   if (hours > 10) {
     await GetServerURL()
   }
+  request.headers["ngrok-skip-browser-warning"] = "69420"
+  request.headers["access-control-allow-origin"] = '*'
+  if (localStorage.getItem("token") !== null) {
+    request.headers["Authorization"] = "Token " + localStorage.getItem('token')
+  }
   request.url = localStorage.getItem('reqURL') + '/api' + request.url
   return request;
 }

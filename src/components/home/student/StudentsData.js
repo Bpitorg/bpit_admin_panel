@@ -26,13 +26,12 @@ export default function StudentsData() {
     axios
       .get(
         `/student/profile/search?query=`,
-        config
       )
       .then((res) => {
         const persons = res.data;
         persons.forEach((element) => {
-            // setRows(...createData(element.name, 159, 6.0, 24, 4.0),);
-            // console.log(element);
+          // setRows(...createData(element.name, 159, 6.0, 24, 4.0),);
+          // console.log(element);
         });
         setObjData(persons);
         //   console.log(persons);
