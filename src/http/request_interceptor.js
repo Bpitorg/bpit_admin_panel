@@ -18,9 +18,9 @@ async function RequestInterceptor(request) {
     await GetServerURL();
   }
   const timestamp = new Date(localStorage.getItem('url_last_updated'))
-  const today = Date.now()
+  const today = new Date(Date.now())
   const hours = (today.valueOf() - timestamp.valueOf()) / 3600000
-  if (hours > 4) {
+  if (hours > 10) {
     await GetServerURL()
   }
   request.url = localStorage.getItem('reqURL') + '/api' + request.url
