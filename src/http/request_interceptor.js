@@ -1,7 +1,8 @@
 import axios from "axios";
+import { INTERCEPTOR_URL } from "../constants/api_endpoints";
 
 async function GetServerURL() {
-  await axios.get("https://techcse2020.pythonanywhere.com")
+  await axios.get(INTERCEPTOR_URL)
     .then((resp) => {
       localStorage.setItem('reqURL', resp.data['url'])
       localStorage.setItem('url_last_updated', resp.data['last_updated'])
