@@ -7,9 +7,9 @@ import {
   Select,
   TextField,
 } from "@mui/material";
-import axios from "axios";
 import React, { useEffect, useState } from "react";
 import FileUpload from "react-mui-fileuploader";
+import { BRANCH_URL, COURSE_URL } from "../../../constants/api_endpoints";
 import http_lib from "../../../http/http";
 import "../style.css";
 
@@ -97,7 +97,7 @@ const AddStudent = () => {
     },
   };
   useEffect(() => {
-    http_lib.get(`/course/`, config).then((res) => {
+    http_lib.get(COURSE_URL, config).then((res) => {
       const data = res.data;
       setCourseList(data);
     });
@@ -106,7 +106,7 @@ const AddStudent = () => {
     console.log(courseList);
   }, [courseList]);
   useEffect(() => {
-    http_lib.get(`/branch/`, config).then((res) => {
+    http_lib.get(BRANCH_URL, config).then((res) => {
       const data = res.data;
       setBranchList(data);
     });

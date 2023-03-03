@@ -4,7 +4,6 @@ import { TabPanel, TabContext, TabList } from '@mui/lab';
 import PersonAddAlt1Icon from '@mui/icons-material/PersonAddAlt1';
 import ListAltIcon from '@mui/icons-material/ListAlt';
 import ListStudent from './listStudent';
-import StudentsData from './StudentsData';
 import AddStudent from './AddStudent';
 
 export default function Student() {

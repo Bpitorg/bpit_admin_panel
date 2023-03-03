@@ -6,8 +6,8 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
-import axios from "../../../http/http";
 import http_lib from "../../../http/http";
+import { STUDENTS_LIST_URL } from "../../../constants/api_endpoints";
 
 function createData(name, eroll, classRoll, branch, group, batch) {
   return { name, eroll, classRoll, branch, group, batch };
@@ -15,18 +15,10 @@ function createData(name, eroll, classRoll, branch, group, batch) {
 
 export default function StudentsData() {
   const [objData, setObjData] = React.useState([]);
-  const [rows, setRows] = React.useState([
-    createData("Frozen yoghurt", 159, 6.0, 24, 4.0),
-  ]);
-  const config = {
-    headers: {
-      Authorization: "Token " + localStorage.getItem("token"),
-    },
-  };
+
   React.useEffect(() => {
     http_lib
-      .get(
-        `/student/profile/search?query=`,
+      .get(STUDENTS_LIST_URL,
       )
       .then((res) => {
         const persons = res.data;

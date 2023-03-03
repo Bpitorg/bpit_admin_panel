@@ -2,8 +2,8 @@ import * as React from "react";
 import { useState, useEffect } from "react";
 import Box from "@mui/material/Box";
 import { DataGrid, GridToolbarQuickFilter } from "@mui/x-data-grid";
-import { useDemoData } from "@mui/x-data-grid-generator";
 import http_lib from "../../../http/http";
+import { STUDENTS_LIST_URL } from "../../../constants/api_endpoints";
 
 function QuickSearchToolbar() {
   return (
@@ -18,25 +18,6 @@ function QuickSearchToolbar() {
   );
 }
 
-const VISIBLE_FIELDS = [
-  "enrollment number",
-  "name",
-  "year",
-  "branch",
-  "section",
-  "group",
-];
-
-const getApplyFilterFnSameYear = (value) => {
-  if (!value || value.length !== 4 || !/\d{4}/.test(value)) {
-    // If the value is not a 4 digit string, it can not be a year so applying this filter is useless
-    return null;
-  }
-  return (params) => {
-    return params.value.getFullYear() === Number(value);
-  };
-};
-
 export default function QuickFilteringCustomLogic() {
   const [objData, setObjData] = useState([]);
   const config = {
@@ -45,7 +26,7 @@ export default function QuickFilteringCustomLogic() {
     },
   };
   useEffect(() => {
-    http_lib.get(`/student/profile/search?query=`, config).then((res) => {
+    http_lib.get(STUDENTS_LIST_URL, config).then((res) => {
       const persons = res.data;
       setObjData(persons);
       // console.log(persons);
