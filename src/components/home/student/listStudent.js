@@ -20,13 +20,9 @@ function QuickSearchToolbar() {
 
 export default function QuickFilteringCustomLogic() {
   const [objData, setObjData] = useState([]);
-  const config = {
-    headers: {
-      Authorization: "Token " + localStorage.getItem("token"),
-    },
-  };
+
   useEffect(() => {
-    http_lib.get(STUDENTS_LIST_URL, config).then((res) => {
+    http_lib.get(STUDENTS_LIST_URL).then((res) => {
       const persons = res.data;
       setObjData(persons);
       // console.log(persons);

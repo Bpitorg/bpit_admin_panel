@@ -91,13 +91,9 @@ const AddStudent = () => {
       }, 3000);
     }
   };
-  const config = {
-    headers: {
-      Authorization: "Token " + localStorage.getItem("token"),
-    },
-  };
+
   useEffect(() => {
-    http_lib.get(COURSE_URL, config).then((res) => {
+    http_lib.get(COURSE_URL).then((res) => {
       const data = res.data;
       setCourseList(data);
     });
@@ -106,7 +102,7 @@ const AddStudent = () => {
     console.log(courseList);
   }, [courseList]);
   useEffect(() => {
-    http_lib.get(BRANCH_URL, config).then((res) => {
+    http_lib.get(BRANCH_URL).then((res) => {
       const data = res.data;
       setBranchList(data);
     });
