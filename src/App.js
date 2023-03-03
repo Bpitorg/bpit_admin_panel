@@ -1,7 +1,7 @@
 import * as React from 'react';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { HashRouter as BrowserRouter, Route, Routes } from 'react-router-dom';
 // import Dashboard from './components/home/dashboard';
 import Home from './components/home/home';
 import Student from './components/home/student/student';
