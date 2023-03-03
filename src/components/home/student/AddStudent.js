@@ -14,6 +14,9 @@ import http_lib from "../../../http/http";
 import "../style.css";
 
 const AddStudent = () => {
+  const [courseList, setCourseList] = useState([]);
+  const [branchList, setBranchList] = useState([]);
+  const [course, setCourse] = useState("");
   const [enrollment_number, setEnrollment_number] = useState("");
   const [name, setName] = useState("");
   const [section, setSection] = useState("");
@@ -30,6 +33,7 @@ const AddStudent = () => {
   const [successText, setSuccessText] = useState("");
 
   const data = {
+    course,
     enrollment_number,
     name,
     section,
@@ -68,6 +72,7 @@ const AddStudent = () => {
       return;
     } else {
       console.log(data);
+      setCourse("");
       setEnrollment_number("");
       setName("");
       setSection("");
@@ -89,17 +94,27 @@ const AddStudent = () => {
   const config = {
     headers: {
       Authorization: "Token " + localStorage.getItem("token"),
-      "Access-Control-Allow-Origin": "*",
-      "Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept",
-      'Content-Type': 'application/json'
     },
   };
- useEffect(() => {
-   http_lib.get('/branch', config).then((res) => {
-     const data = res.data;
-     console.log(data);
-   });
- }, []);
+  useEffect(() => {
+    http_lib.get(`/course/`, config).then((res) => {
+      const data = res.data;
+      setCourseList(data);
+    });
+  }, []);
+  useEffect(() => {
+    console.log(courseList);
+  }, [courseList]);
+  useEffect(() => {
+    http_lib.get(`/branch/`, config).then((res) => {
+      const data = res.data;
+      setBranchList(data);
+    });
+  }, []);
+  useEffect(() => {
+    console.log(branchList);
+  }, [branchList]);
+
   const [filesToUpload, setFilesToUpload] = useState([]);
 
   const handleFilesChange = (files) => {
@@ -116,15 +131,35 @@ const AddStudent = () => {
       method: "POST",
       body: formData,
     });
-  }
+  };
   return (
     <form onSubmit={formSubmitHandler}>
+      <div className="row">
+        {/* COURSE */}
+        <FormControl fullWidth>
+          <InputLabel id="demo-simple-select-label">COURSE</InputLabel>
+          <Select
+            labelId="demo-simple-select-label"
+            id="demo-simple-select"
+            value={course}
+            label="Course"
+            onChange={(e) => setCourse(e.target.value)}
+          >
+            {courseList.map((course) => (
+              <MenuItem value={course.name}>
+                {course.course_name}
+              </MenuItem>
+            ))}
+          </Select>
+        </FormControl>
+      </div>
+      <br/>
       <div className="row">
         {/* NAME */}
         <TextField
           fullWidth
           id="outlined-basic"
-          label="Name"
+          label="Student's Name"
           variant="outlined"
           value={name}
           onChange={(e) => setName(e.target.value)}
@@ -180,12 +215,11 @@ const AddStudent = () => {
             label="Branch"
             onChange={(e) => setBranch(e.target.value)}
           >
-            <MenuItem value={"CSE"}>CSE</MenuItem>
-            <MenuItem value={"IT"}>IT</MenuItem>
-            <MenuItem value={"ECE"}>ECE</MenuItem>
-            <MenuItem value={"EEE"}>EEE</MenuItem>
-            <MenuItem value={"AI"}>AI</MenuItem>
-            <MenuItem value={"DS"}>DS</MenuItem>
+            {branchList.map((branch) => (
+              <MenuItem value={branch.branch_slug}>
+                {branch.branch_slug}
+              </MenuItem>
+            ))}
           </Select>
         </FormControl>
         {/* SECTION */}

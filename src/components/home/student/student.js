@@ -19,13 +19,13 @@ export default function Student() {
       <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column' }}>
         <TabContext value={value}>
           <TabList onChange={handleChange} >
-            <Tab value='1' icon={<ListAltIcon />} iconPosition='start' label="List Students" />
-            <Tab value='2' icon={<PersonAddAlt1Icon />} iconPosition='start' label="Add Student" />
+            <Tab value='1' icon={<PersonAddAlt1Icon />} iconPosition='start' label="Add Student" />
+            <Tab value='2' icon={<ListAltIcon />} iconPosition='start' label="List Students" />
           </TabList>
           <Divider />
           {/* <TabPanel value='1'><ListStudent /></TabPanel> */}
-          <TabPanel value='1'><StudentsData/></TabPanel>
-          <TabPanel value='2'><AddStudent /></TabPanel>
+          <TabPanel value='1'><AddStudent /></TabPanel>
+          <TabPanel value='2'><ListStudent/></TabPanel>
         </TabContext>
       </Paper>
     </Grid>
