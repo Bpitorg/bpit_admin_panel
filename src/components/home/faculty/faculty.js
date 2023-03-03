@@ -3,6 +3,7 @@ import { Grid, Paper, Tab, Divider } from '@mui/material';
 import { TabPanel, TabContext, TabList } from '@mui/lab';
 import PersonAddAlt1Icon from '@mui/icons-material/PersonAddAlt1';
 import ListAltIcon from '@mui/icons-material/ListAlt';
+import AddFaculty from './AddFaculty';
 
 export default function Faculty() {
   const [value, setValue] = React.useState('2');
@@ -21,7 +22,7 @@ export default function Faculty() {
           </TabList>
           <Divider />
           <TabPanel value='1'>1</TabPanel>
-          <TabPanel value='2'>2</TabPanel>
+          <TabPanel value='2'><AddFaculty /></TabPanel>
         </TabContext>
       </Paper>
     </Grid>

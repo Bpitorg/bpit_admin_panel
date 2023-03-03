@@ -1,0 +1,17 @@
+.row
+{
+    margin: auto 1rem;
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+    justify-content: space-between;
+    flex-grow: 1;
+}
+.css-1cxv2pl-MuiPaper-root{
+    background-color: black !important;
+}
+@media screen and (max-width:500px) {
+    .row{
+        flex-direction: column;
+    }
+}
