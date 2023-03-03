@@ -85,7 +85,7 @@ export default function Bar(props) {
           noWrap
           sx={{ flexGrow: 1 }}
         >
-          Dashboard
+          Admin Panel
         </Typography>
         <Tooltip title="Account settings">
           <IconButton
@@ -138,12 +138,12 @@ export default function Bar(props) {
         transformOrigin={{ horizontal: 'right', vertical: 'top' }}
         anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
       >
-        <MenuItem>
+        {/* <MenuItem>
           <ListItemIcon>
             <PersonAdd fontSize="small" />
           </ListItemIcon>
           Add another account
-        </MenuItem>
+        </MenuItem> */}
         <MenuItem onClick={handleLogout}>
           <ListItemIcon>
             <Logout fontSize="small" />
