@@ -31,7 +31,7 @@ function setCredentials(data) {
   localStorage.setItem('token', data.token)
   localStorage.setItem('name', data.name)
   localStorage.setItem('email', data.email)
-  http_lib.defaults.headers = { 'Authorization': `Token ${data.token}` } // check agar logout se hata rhe hai yanhi?
+  // http_lib.defaults.headers = { 'Authorization': `Token ${data.token}` } // check agar logout se hata rhe hai yanhi?
 }
 
 export default function Login() {
