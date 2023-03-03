@@ -35,8 +35,6 @@ function setCredentials(data) {
 }
 
 export default function Login() {
-  const [dark, setDark] = React.useState(false);
-  const [mode, setMode] = React.useState("Light");
   var [loader, setLoader] = React.useState(false);
   var [error, setError] = React.useState('');
   let navigate = useNavigate();
@@ -54,9 +52,8 @@ export default function Login() {
     http_lib.post(LOGIN_URL, data)
       .then(res => {
         setCredentials(res.data)
-        console.log(res.data)
         setLoader(false);
-        navigate('/home/dashboard')
+        navigate('/home')
       })
       .catch(err => {
         setLoader(false)
@@ -64,11 +61,6 @@ export default function Login() {
         setError(JSON.stringify(err.response.data))
       })
   };
-  const modeHandler = () => {
-    setDark(!dark);
-    if (dark === true) { setMode("Dark") }
-    else setMode("Light")
-  }
 
   return (
     <>
@@ -84,10 +76,6 @@ export default function Login() {
             backgroundImage:
               "url(https://www.bpitindia.com/wp-content/uploads/2020/10/college.jpg)",
             backgroundRepeat: "no-repeat",
-            backgroundColor: (t) =>
-              dark === true
-                ? t.palette.grey[50]
-                : t.palette.grey[900],
             backgroundSize: "cover",
             backgroundPosition: "center",
           }}

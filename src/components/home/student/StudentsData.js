@@ -8,20 +8,9 @@ import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import axios from "../../../http/http";
 
-function createData(name, eroll, classRoll, branch, group, batch) {
-  return { name, eroll, classRoll, branch, group, batch };
-}
-
 export default function StudentsData() {
   const [objData, setObjData] = React.useState([]);
-  const [rows, setRows] = React.useState([
-    createData("Frozen yoghurt", 159, 6.0, 24, 4.0),
-  ]);
-  const config = {
-    headers: {
-      Authorization: "Token " + localStorage.getItem("token"),
-    },
-  };
+
   React.useEffect(() => {
     axios
       .get(

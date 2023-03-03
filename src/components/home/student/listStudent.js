@@ -22,16 +22,6 @@ function QuickSearchToolbar() {
 
 const VISIBLE_FIELDS = ["enrollment number","name", "year", "branch", "section", "group"];
 
-const getApplyFilterFnSameYear = (value) => {
-  if (!value || value.length !== 4 || !/\d{4}/.test(value)) {
-    // If the value is not a 4 digit string, it can not be a year so applying this filter is useless
-    return null;
-  }
-  return (params) => {
-    return params.value.getFullYear() === Number(value);
-  };
-};
-
 export default function QuickFilteringCustomLogic() {
   const [objData, setObjData] = useState([]);
 const config = {
@@ -45,7 +35,7 @@ const config = {
       .then((res) => {
         const persons = res.data;
         setObjData(...persons);
-        console.log(persons)
+        console.log(objData)
       });
   }, []);
   const { data } = useDemoData({
