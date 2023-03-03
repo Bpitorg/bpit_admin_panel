@@ -10,7 +10,7 @@ import Faculty from './components/home/faculty/faculty';
 import { Button } from '@mui/material';
 
 export default function App() {
-  const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)');
+  const prefersDarkMode = useMediaQuery('(prefers-color-scheme: light)');
 
   const theme = React.useMemo(
     () =>

@@ -1,10 +1,9 @@
 import * as React from "react";
-import {useState, useEffect} from 'react'
+import { useState, useEffect } from "react";
 import Box from "@mui/material/Box";
 import { DataGrid, GridToolbarQuickFilter } from "@mui/x-data-grid";
-import { useDemoData } from "@mui/x-data-grid-generator";
-import axios from "axios";
-
+import http_lib from "../../../http/http";
+import { STUDENTS_LIST_URL } from "../../../constants/api_endpoints";
 
 function QuickSearchToolbar() {
   return (
@@ -19,47 +18,26 @@ function QuickSearchToolbar() {
   );
 }
 
-
-const VISIBLE_FIELDS = ["enrollment number","name", "year", "branch", "section", "group"];
-
-const getApplyFilterFnSameYear = (value) => {
-  if (!value || value.length !== 4 || !/\d{4}/.test(value)) {
-    // If the value is not a 4 digit string, it can not be a year so applying this filter is useless
-    return null;
-  }
-  return (params) => {
-    return params.value.getFullYear() === Number(value);
-  };
-};
-
 export default function QuickFilteringCustomLogic() {
   const [objData, setObjData] = useState([]);
-const config = {
-  headers: {
-    Authorization: 'Token '+localStorage.getItem('token'),
-  },
-};
-  useEffect(() => {
-    axios
-      .get(`/student/profile/search?query=`,config)
-      .then((res) => {
-        const persons = res.data;
-        setObjData(...persons);
-        console.log(persons)
-      });
-  }, []);
-  const { data } = useDemoData({
-    dataSet: "Employee",
-    visibleFields: VISIBLE_FIELDS,
-    rowLength: 100,
-  });
-  // console.log(data.columns);
 
+  useEffect(() => {
+    http_lib.get(STUDENTS_LIST_URL).then((res) => {
+      const persons = res.data;
+      setObjData(persons);
+      // console.log(persons);
+    });
+  }, []);
+
+  const useData = {rows:objData}
+  useEffect(() => {
+    console.log(useData);
+  }, []);
   // Otherwise filter will be applied on fields such as the hidden column id
   const columns = React.useMemo(
     () => [
       {
-        field: "enrollment number",
+        field: "enrollment_number",
         headerName: "E.NO",
         width: 175,
       },
@@ -84,7 +62,7 @@ const config = {
         width: 100,
       },
       {
-        field: "group",
+        field: "student_group",
         headerName: "Group",
         width: 100,
       },
@@ -98,9 +76,10 @@ const config = {
   );
 
   return (
-    <Box sx={{ height: 400, width: 1 }}>
+    <Box sx={{ height: 600, width: 1 }}>
       <DataGrid
-        {...data}
+        getRowId={(row) => row.enrollment_number}
+        {...useData}
         columns={columns}
         components={{ Toolbar: QuickSearchToolbar }}
       />
