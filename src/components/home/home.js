@@ -16,11 +16,11 @@ export default function Home() {
     setOpen(!open);
   };
   let navigate = useNavigate();
-  React.useEffect(() => {
-    if (!localStorage.getItem('token')) {
-      navigate('/login')
-    }
-  }, [navigate])
+  // React.useEffect(() => {
+  //   if (!localStorage.getItem('token')) {
+  //     navigate('/login')
+  //   }
+  // }, [navigate])
 
   return (
     <Box sx={{ display: 'flex' }}>
