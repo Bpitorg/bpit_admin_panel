@@ -1,6 +1,5 @@
-import * as React from 'react';
+import React from 'react';
 import Backdrop from '@mui/material/Backdrop';
-// import CircularProgress from '@mui/material/CircularProgress';
 import './loader.css';
 
 export default function Loader(props) {
@@ -12,7 +11,7 @@ export default function Loader(props) {
   return (
     <div>
       <Backdrop
-        sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+        sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 20 }}
         open={open}
       >
         <div className="loading-1">

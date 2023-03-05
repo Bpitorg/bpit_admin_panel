@@ -6,7 +6,7 @@ import PersonAddAlt1Icon from '@mui/icons-material/PersonAddAlt1';
 // import ListStudent from './listStudent';
 // import StudentsData from './StudentsData';
 
-export default function Student() {
+export default function Student({ setLoader }) {
   const [value, setValue] = React.useState('1');
 
   const handleChange = (event, newValue) => {

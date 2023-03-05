@@ -10,7 +10,7 @@ import { Navbar } from '../navbar/navbar';
 // import Chart from './chart';
 // import Footer from './footer';
 
-export default function Home() {
+export default function Home({ setLoader }) {
   const [open, setOpen] = React.useState(false);
   const toggleDrawer = () => {
     setOpen(!open);
@@ -25,7 +25,7 @@ export default function Home() {
   return (
     <Box sx={{ display: 'flex' }}>
       <CssBaseline />
-      <Navbar open={open} toggleDrawer={toggleDrawer} />
+      <Navbar open={open} toggleDrawer={toggleDrawer} setLoader={setLoader} />
       <Box
         component="main"
         sx={{

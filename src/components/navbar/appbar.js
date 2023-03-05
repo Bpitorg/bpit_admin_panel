@@ -50,17 +50,20 @@ export default function Bar(props) {
   }
 
   function handleLogout() {
+    props.setLoader(true)
     http_lib
       .get(LOGOUT_URL)
       .then((res) => {
+        props.setLoader(false)
         localStorage.clear();
         navigate("/login");
       })
       .catch((err) => {
+        props.setLoader(false)
         console.log(err.response.data);
       });
   }
-  
+
   return (
     <AppBar position="absolute" open={props.open}>
       <Toolbar
@@ -101,7 +104,7 @@ export default function Bar(props) {
             <SettingsIcon sx={{ color: grey[50] }} />
           </IconButton>
         </Tooltip>
-        
+
       </Toolbar>
       <Menu
         anchorEl={anchorEl}

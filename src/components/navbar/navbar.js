@@ -2,18 +2,19 @@ import * as React from 'react'
 import AppBar from './appbar'
 import SideBar from './sidebar'
 
-export function Navbar(props) {
+export function Navbar({ open, toggleDrawer, setLoader }) {
   return (
     <>
       <AppBar
         xs={{ backgroundColor: "blue" }}
-        open={props.open}
-        toggleDrawer={props.toggleDrawer}
+        open={open}
+        toggleDrawer={toggleDrawer}
+        setLoader={setLoader}
       />
       <SideBar
         xs={{ backgroundColor: "blue" }}
-        open={props.open}
-        toggleDrawer={props.toggleDrawer}
+        open={open}
+        toggleDrawer={toggleDrawer}
       />
     </>
   );
