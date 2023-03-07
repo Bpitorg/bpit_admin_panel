@@ -10,7 +10,6 @@ import Grid from '@mui/material/Grid';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import http_lib from '../../http/http';
-import Loader from '../loader/loader';
 import { useNavigate } from 'react-router-dom'
 import { LOGIN_URL } from '../../constants/api_endpoints';
 
@@ -31,11 +30,9 @@ function setCredentials(data) {
   localStorage.setItem('token', data.token)
   localStorage.setItem('name', data.name)
   localStorage.setItem('email', data.email)
-  // http_lib.defaults.headers = { 'Authorization': `Token ${data.token}` } // check agar logout se hata rhe hai yanhi?
 }
 
-export default function Login() {
-  var [loader, setLoader] = React.useState(false);
+export default function Login({ setLoader }) {
   var [error, setError] = React.useState('');
   let navigate = useNavigate();
 
@@ -64,7 +61,6 @@ export default function Login() {
 
   return (
     <>
-      <Loader show={loader} />
       <Grid container component="main" sx={{ height: "100vh" }}>
         <CssBaseline />
         <Grid

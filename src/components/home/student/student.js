@@ -7,7 +7,7 @@ import AddStudent from './AddStudent';
 // import ListStudent from './listStudent';
 // import StudentsData from './StudentsData';
 
-export default function Student() {
+export default function Student({ setLoader }) {
   const [value, setValue] = React.useState('1');
 
   const handleChange = (event, newValue) => {
