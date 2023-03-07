@@ -11,7 +11,7 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import http_lib from '../../http/http';
 import { useNavigate } from 'react-router-dom'
-import { LOGIN_URL } from '../../constants/api_endpoints';
+import { LOGIN_URL } from '../../constants/apiEndpoints';
 
 function Copyright(props) {
   return (

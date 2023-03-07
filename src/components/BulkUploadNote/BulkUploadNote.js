@@ -1,5 +1,5 @@
 import React from "react";
-import "./BulkUploadNote.css";
+import "./bulkUploadNote.css";
 import { Button } from "@mui/material";
 // import StudenSampleCSV from '../../../public/upload_data_files/student_format.xlsx'
 

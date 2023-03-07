@@ -1,5 +1,5 @@
 import axios from "axios";
-import { INTERCEPTOR_URL } from "../constants/api_endpoints";
+import { INTERCEPTOR_URL } from "../constants/apiEndpoints";
 
 async function GetServerURL() {
   await axios.get(INTERCEPTOR_URL)

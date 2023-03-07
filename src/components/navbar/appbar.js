@@ -14,7 +14,7 @@ import SettingsIcon from "@mui/icons-material/Settings";
 import { grey } from "@mui/material/colors";
 import { useNavigate } from "react-router-dom";
 import http_lib from "../../http/http";
-import { LOGOUT_URL } from "../../constants/api_endpoints";
+import { LOGOUT_URL } from "../../constants/apiEndpoints";
 
 const drawerWidth = 240;
 

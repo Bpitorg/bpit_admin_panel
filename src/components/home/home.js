@@ -3,7 +3,7 @@ import CssBaseline from '@mui/material/CssBaseline';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import Container from '@mui/material/Container';
-import { Outlet, useNavigate } from 'react-router-dom';
+import { Outlet } from 'react-router-dom';
 
 import { Navbar } from '../navbar/navbar';
 
@@ -15,7 +15,7 @@ export default function Home({ setLoader }) {
   const toggleDrawer = () => {
     setOpen(!open);
   };
-  let navigate = useNavigate();
+  // let navigate = useNavigate();
   // React.useEffect(() => {
   //   if (!localStorage.getItem('token')) {
   //     navigate('/login')

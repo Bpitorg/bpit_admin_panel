@@ -9,12 +9,12 @@ import {
 } from "@mui/material";
 import { useFormik } from "formik";
 import React, { useEffect, useState } from "react";
-import { ADD_STUDENT_URL, BRANCH_URL, COURSE_URL } from "../../../constants/api_endpoints";
+import { ADD_STUDENT_URL, BRANCH_URL, COURSE_URL } from "../../../constants/apiEndpoints";
 import http_lib from "../../../http/http";
-import { signUpSchema } from "../../../schemas/signupSchema";
+import { addStudentSchema } from "../../../schemas/addStudentSchema";
 import "../style.css";
 import { AttachFile, CloudUpload } from "@mui/icons-material";
-import BulkUploadNote from "../../BulkUploadNote/BulkUploadNote";
+import BulkUploadNote from "../../bulkUploadNote/bulkUploadNote";
 import { useNavigate } from "react-router-dom";
 
 const styles = {
@@ -47,7 +47,7 @@ const initialValues = {
 const AddStudent = () => {
   const { values, errors, handleBlur, handleChange } = useFormik({
     initialValues: initialValues,
-    validationSchema: signUpSchema,
+    validationSchema: addStudentSchema,
 
   });
   const navigate = useNavigate()
@@ -83,11 +83,11 @@ const AddStudent = () => {
       })
       .catch((err) => console.log(err));
   }, []);
-  
-const handleFormChange = (event) => {
-  setFilesToUpload(event.target.files[0]);
-  console.log(filesToUpload);
-};
+
+  const handleFormChange = (event) => {
+    setFilesToUpload(event.target.files[0]);
+    console.log(filesToUpload);
+  };
   return (
     <form onSubmit={handleSubmit}>
       <div className="row">
@@ -327,8 +327,8 @@ const handleFormChange = (event) => {
       >
         SUBMIT
       </Button>
-      <div style={{ margin: "1rem", background: "red" }}>{}</div>
-      <div style={{ margin: "1rem", background: "green" }}>{}</div>
+      <div style={{ margin: "1rem", background: "red" }}>{ }</div>
+      <div style={{ margin: "1rem", background: "green" }}>{ }</div>
       <Divider orientation="horizontal" flexItem>
         OR, UPLOAD FILES
       </Divider>
@@ -339,7 +339,7 @@ const handleFormChange = (event) => {
           background: "rgba(25, 118, 210, 0.26)",
         }}
       >
-        <div style={{ width: "50%" , margin:"1rem"}}>
+        <div style={{ width: "50%", margin: "1rem" }}>
           <input
             accept=".xls,.xlsx"
             style={styles.input}
