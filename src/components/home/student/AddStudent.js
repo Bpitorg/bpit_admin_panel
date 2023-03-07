@@ -11,7 +11,7 @@ import { useFormik } from "formik";
 import React, { useEffect, useState } from "react";
 import { ADD_STUDENT_URL, BRANCH_URL, COURSE_URL } from "../../../constants/api_endpoints";
 import http_lib from "../../../http/http";
-import { signUpSchema } from "../../../schemas/schemas";
+import { signUpSchema } from "../../../schemas/signupSchema";
 import "../style.css";
 import { AttachFile, CloudUpload } from "@mui/icons-material";
 import BulkUploadNote from "../../BulkUploadNote/BulkUploadNote";
