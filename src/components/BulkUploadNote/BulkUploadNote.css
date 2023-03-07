@@ -1,0 +1,10 @@
+
+.note{
+    font-size: .8rem;
+    width: 50%;
+    padding: 0 .5rem;
+}
+
+.nestedLi{
+    list-style:inside;
+}

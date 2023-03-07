@@ -9,7 +9,6 @@ import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import Tooltip from '@mui/material/Tooltip';
-import PersonAdd from '@mui/icons-material/PersonAdd';
 import Logout from '@mui/icons-material/Logout';
 import SettingsIcon from '@mui/icons-material/Settings';
 import { grey } from '@mui/material/colors';
@@ -54,7 +53,7 @@ export default function Bar(props) {
 
   function handleLogout() {
     localStorage.clear();
-    navigate('');
+    navigate('/login');
   }
   // const theme = useTheme();
   // const colorMode = React.useContext(ColorModeContext);

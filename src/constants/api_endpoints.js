@@ -3,3 +3,4 @@ export const LOGIN_URL = "/auth/admin/login/";
 export const BRANCH_URL = "/branch/";
 export const COURSE_URL = "/course/";
 export const STUDENTS_LIST_URL = "/student/profile/search?query=";
+export const ADD_STUDENT_URL = "/student/profile/add";
