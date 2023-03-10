@@ -14,7 +14,7 @@ import http_lib from "../../../http/http";
 import { addStudentSchema } from "../../../schemas/addStudentSchema";
 import "../style.css";
 import { AttachFile, CloudUpload } from "@mui/icons-material";
-import BulkUploadNote from "../../bulkUploadNote/bulkUploadNote";
+import BulkUploadNote from "./bulkUploadNote/bulkUploadNote";
 import { useNavigate } from "react-router-dom";
 
 const styles = {
@@ -44,7 +44,7 @@ const initialValues = {
   fileUploadInput: "",
 };
 
-const AddStudent = () => {
+const AddStudent = ({setLoader}) => {
   const { values, errors, handleBlur, handleChange } = useFormik({
     initialValues: initialValues,
     validationSchema: addStudentSchema,
@@ -53,6 +53,7 @@ const AddStudent = () => {
   const navigate = useNavigate()
   function handleSubmit(e) {
     e.preventDefault();
+    setLoader(true)
     http_lib
       .post(ADD_STUDENT_URL, values)
       .then(() => {
@@ -61,6 +62,7 @@ const AddStudent = () => {
       .catch((err) => {
         console.log(err.response.data);
       });
+      setLoader(false)
     console.log(values)
   }
   const [courseList, setCourseList] = useState([]);

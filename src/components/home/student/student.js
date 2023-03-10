@@ -24,7 +24,7 @@ export default function Student({ setLoader }) {
           </TabList>
           <Divider />
           {/* <TabPanel value='1'><ListStudent /></TabPanel> */}
-          <TabPanel value='1'><AddStudent /></TabPanel>
+          <TabPanel value='1'><AddStudent setLoader={setLoader}/></TabPanel>
         </TabContext>
       </Paper>
     </Grid>

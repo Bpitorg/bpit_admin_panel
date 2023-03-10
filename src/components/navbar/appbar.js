@@ -55,9 +55,9 @@ export default function Bar(props) {
     http_lib
       .get(LOGOUT_URL)
       .then((res) => {
-        props.setLoader(false)
-        localStorage.clear();
         navigate("/login");
+        localStorage.clear();
+        props.setLoader(false)
       })
       .catch((err) => {
         props.setLoader(false)
