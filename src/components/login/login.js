@@ -12,6 +12,7 @@ import Typography from '@mui/material/Typography';
 import http_lib from '../../http/http';
 import { useNavigate } from 'react-router-dom'
 import { LOGIN_URL } from '../../constants/api_endpoints';
+import './style.css';
 
 function Copyright(props) {
   return (
