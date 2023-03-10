@@ -13,7 +13,7 @@ import http_lib from '../../http/http';
 import Loader from '../loader/loader';
 import { useNavigate } from 'react-router-dom'
 import { LOGIN_URL } from '../../constants/api_endpoints';
-import '../style.css';
+import './style.css';
 
 function Copyright(props) {
   return (
