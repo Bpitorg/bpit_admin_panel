@@ -26,7 +26,11 @@ const styles = {
   },
 };
 
-const initialValues = {
+
+
+const AddStudent = ({setLoader}) => {
+
+  const initialValues = {
   enrollment_number: "",
   name: "",
   section: "",
@@ -44,18 +48,39 @@ const initialValues = {
   fileUploadInput: "",
 };
 
-const AddStudent = ({setLoader}) => {
+  const [isFile, setIsFile] = useState(false);
+
   const { values, errors, handleBlur, handleChange } = useFormik({
     initialValues: initialValues,
     validationSchema: addStudentSchema,
 
   });
   const navigate = useNavigate()
+  const submittedData = {
+    is_file: false,
+    student_data: [
+      {
+        enrollment_number: values.enrollment_number,
+        name: values.name,
+        section: values.section,
+        batch: values.batch,
+        class_roll_number: values.class_roll_number,
+        student_group: values.student_group,
+        student_phone_number: values.student_phone_number,
+        student_email_id: values.student_email_id,
+        mother_name: values.mother_name,
+        father_name: values.father_name,
+        parent_phone_number: values.parent_phone_number,
+        branch: values.branch,
+        course: values.course
+      },
+    ],
+  };
   function handleSubmit(e) {
     e.preventDefault();
     setLoader(true)
     http_lib
-      .post(ADD_STUDENT_URL, values)
+      .post(ADD_STUDENT_URL, submittedData)
       .then(() => {
         navigate("/home/students");
       })
@@ -86,10 +111,35 @@ const AddStudent = ({setLoader}) => {
       .catch((err) => console.log(err));
   }, []);
 
+  let formData = new FormData();
+
   const handleFormChange = (event) => {
     setFilesToUpload(event.target.files[0]);
     console.log(filesToUpload);
+    if(event.target && event.target.files[0])
+    {
+      formData.append('file', event.target.files[0])
+    }
   };
+  const fileData = {
+    is_file: true,
+    file: formData,
+  };
+
+  const fileUploadHandler = (e) => {
+    e.preventDefault();
+    console.log(filesToUpload)
+    setLoader(true);
+    http_lib
+      .post(ADD_STUDENT_URL, fileData)
+      .then(() => {
+        navigate("/home/students");
+      })
+      .catch((err) => {
+        console.log(err.response.data);
+      });
+    setLoader(false);
+  }
   return (
     <form onSubmit={handleSubmit}>
       <div className="row">
@@ -107,7 +157,7 @@ const AddStudent = ({setLoader}) => {
           >
             {courseList &&
               courseList.map((course) => (
-                <MenuItem value={course.course_name} key={course.course_name}>
+                <MenuItem value={course.id} key={course.course_name}>
                   {course.course_name}
                 </MenuItem>
               ))}
@@ -199,7 +249,7 @@ const AddStudent = ({setLoader}) => {
           >
             {branchList &&
               branchList.map((branch) => (
-                <MenuItem value={branch.branch_slug} key={branch.branch_slug}>
+                <MenuItem value={branch.branch_code} key={branch.branch_code}>
                   {branch.branch_slug}
                 </MenuItem>
               ))}
@@ -375,7 +425,7 @@ const AddStudent = ({setLoader}) => {
                 component="span"
                 startIcon={<CloudUpload />}
                 style={styles.button}
-                onClick={() => console.log(filesToUpload)}
+                onClick={fileUploadHandler}
               >
                 Upload
               </Button>
