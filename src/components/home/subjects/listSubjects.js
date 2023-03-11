@@ -7,9 +7,9 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import TablePagination from '@mui/material/TablePagination';
 import Paper from '@mui/material/Paper';
-import { SUBJECTS_URL } from '../../../constants/api_endpoints';
 import http_lib from '../../../http/http';
 import { AddSerialNo } from '../../../utils/utils';
+import { SUBJECTS_URL } from '../../../constants/apiEndpoints';
 
 function ListSubjects({ setLoader }) {
   const [subjectsList, setSubjectsList] = useState([])
