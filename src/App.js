@@ -7,6 +7,7 @@ import Student from './components/home/student/student';
 import Login from './components/login/login';
 import { Dashboard } from '@mui/icons-material';
 import Loader from './components/loader/loader';
+import Subjects from './components/home/subjects/subjects';
 // import Faculty from './components/home/faculty/faculty';
 
 export default function App() {
@@ -33,6 +34,7 @@ export default function App() {
           <Route path="/home" element={<Home setLoader={setLoader} />}>
             <Route path="dashboard" element={<Dashboard setLoader={setLoader} />} />
             <Route path="students" element={<Student setLoader={setLoader} />} />
+            <Route path="subjects" element={<Subjects setLoader={setLoader} />} />
             {/* <Route path="faculty" element={<Faculty setLoader={setLoader} />} /> */}
           </Route>
           <Route path="*" element={<h1>404</h1>} />
