@@ -6,12 +6,13 @@ import { ListItemIcon, List, Divider } from '@mui/material';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import ListItemText from '@mui/material/ListItemText';
 import ListItem from '@mui/material/ListItem';
+import SchoolIcon from '@mui/icons-material/School';
 // import DashboardIcon from '@mui/icons-material/Dashboard';
 import PeopleIcon from '@mui/icons-material/People';
 import LibraryBooksIcon from '@mui/icons-material/LibraryBooks';
 import Toolbar from '@mui/material/Toolbar';
 import IconButton from '@mui/material/IconButton';
-// import BarChartIcon from '@mui/icons-material/BarChart';
+import Tooltip from '@mui/material/Tooltip';
 import {
   Link as RouterLink,
 } from 'react-router-dom';
@@ -96,9 +97,38 @@ export default function SideBar(props) {
 
 const mainListItems = (
   <React.Fragment>
-    {/* <ListItemLink to="dashboard" primary="Dashboard" icon={<DashboardIcon />} /> */}
-    <ListItemLink to="students" primary="Students" icon={<PeopleIcon />} />
-    <ListItemLink to="subjects" primary="Subjects" icon={<LibraryBooksIcon />} />
-    {/* <ListItemLink to="faculty" primary="Faculty" icon={<BarChartIcon />} /> */}
-  </React.Fragment>
+    <ListItemLink
+      to="students"
+      primary="Students"
+      icon={
+        <Tooltip title={<h3>Students</h3>} placement='right'>
+          <IconButton>
+            <SchoolIcon />
+          </IconButton>
+        </Tooltip>
+      }
+    />
+    <ListItemLink
+      to="faculty"
+      primary="Faculties"
+      icon={
+        <Tooltip title={<h3>Faculties</h3>} placement='right'>
+          <IconButton>
+            <PeopleIcon />
+          </IconButton>
+        </Tooltip>
+      }
+    />
+    <ListItemLink
+      to="subjects"
+      primary="Subjects"
+      icon={
+        <Tooltip title={<h3>Subjects</h3>} placement='right'>
+          <IconButton>
+            <LibraryBooksIcon />
+          </IconButton>
+        </Tooltip>
+      }
+    />
+  </React.Fragment >
 );

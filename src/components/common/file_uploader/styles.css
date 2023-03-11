@@ -1,0 +1,41 @@
+#form-file-upload {
+  max-width: 97%;
+  text-align: center;
+}
+
+#input-file-upload {
+  display: none;
+}
+
+#label-file-upload {
+  height: 100%;
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-width: 2px;
+  border-radius: 0.2rem;
+  border-style: dashed;
+  border-color: #cbd5e1;
+}
+
+#upload-icon {
+  color: #1565c0a2;
+  font-size: 200px;
+}
+
+#upload-icon:hover,
+#upload-icon.drag-active {
+  color: #1565c0;
+}
+
+#drag-file-element {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 1rem;
+  top: 0px;
+  right: 0px;
+  bottom: 0px;
+  left: 0px;
+}

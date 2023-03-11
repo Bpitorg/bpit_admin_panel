@@ -3,87 +3,98 @@ import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
-import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import TablePagination from '@mui/material/TablePagination';
 import Paper from '@mui/material/Paper';
 import { SUBJECTS_URL } from '../../../constants/api_endpoints';
 import http_lib from '../../../http/http';
-import { AddSerialNo } from '../../../utils/utils';
+import { rowsPerPage } from '../../../constants/constants';
+import TableHeaders from '../../common/tableHeaders';
+// import TextField from '@mui/material/TextField';
+// import SearchIcon from '@mui/icons-material/Search';
+// import IconButton from '@mui/material/IconButton';
 
 function ListSubjects({ setLoader }) {
   const [subjectsList, setSubjectsList] = useState([])
   const [page, setPage] = useState(0);
-  const [rowsPerPage, setRowsPerPage] = useState(15);
+  const [count, setCount] = useState(0)
+  // const [searchQuery, setSearchQuery] = useState('')
 
-  const emptyRows = page > 0 ? Math.max(0, (1 + page) * rowsPerPage - subjectsList.length) : 0;
+  const tableColumns = ["Subject Code", "Subject Name"]
 
-  useEffect(() => {
+  const handleRequest = (page_no) => {
     setLoader(true)
-    http_lib.get(SUBJECTS_URL)
+    http_lib.get(SUBJECTS_URL + `?page=${page_no}`)
       .then((res) => {
-        setSubjectsList(AddSerialNo(res.data))
+        setSubjectsList(res.data['results'])
+        setCount(res.data['count'])
         setLoader(false)
       })
       .catch((err) => {
         setLoader(false)
         console.log(err)
       })
+  }
+
+  useEffect(() => {
+    handleRequest(1)
     // eslint-disable-next-line
   }, [])
 
-  const handleChangePage = (event, newPage) => {
+  const handleChangePage = (_, newPage) => {
     setPage(newPage);
+    handleRequest(newPage + 1)
   };
 
-  const handleChangeRowsPerPage = (event) => {
-    setRowsPerPage(parseInt(event.target.value, 10));
-    setPage(0);
-  };
+  // const searchSubject = (_) => {
+  //   if (searchQuery.length <= 6)
+  //     return
+  //   // make api call
+  // }
 
   return (
-    <Paper sx={{ width: '100%', mb: 1 }}>
-      <TableContainer>
-        <Table sx={{ minWidth: 650 }} aria-label="simple table">
-          <TableHead>
-            <TableRow>
-              <TableCell>S. No</TableCell>
-              <TableCell>Subject Code</TableCell>
-              <TableCell>Subjects Name</TableCell>
-              <TableCell>Action</TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {(rowsPerPage > 0
-              ? subjectsList.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-              : subjectsList
-            ).map((subject, key) => (
-              <TableRow hover key={key}>
-                {/* <TableCell>{key + 1}</TableCell> */}
-                <TableCell>{subject['sno']}</TableCell>
-                <TableCell>{subject['subject_name']}</TableCell>
-                <TableCell>{subject['subject_code']}</TableCell>
-                <TableCell>View edit delete</TableCell>
-              </TableRow>
-            ))}
-            {emptyRows > 0 && (
-              <TableRow style={{ height: 53 * emptyRows }}>
-                <TableCell colSpan={4} />
-              </TableRow>
-            )}
-          </TableBody>
-        </Table>
-      </TableContainer>
-      <TablePagination
-        rowsPerPageOptions={[5, 10, 15, 20]}
-        component="div"
-        count={subjectsList.length}
-        rowsPerPage={rowsPerPage}
-        page={page}
-        onPageChange={handleChangePage}
-        onRowsPerPageChange={handleChangeRowsPerPage}
-      />
-    </Paper>
+    <>
+      {/* <TextField
+        value={searchQuery}
+        sx={{ mb: 2, p: 0 }}
+        placeholder='Search Subjects'
+        variant="outlined"
+        fullWidth
+        size='small'
+        InputProps={{
+          endAdornment: (
+            <IconButton variant="text" color='primary' onClick={searchSubject} > <SearchIcon /> </IconButton>
+          ),
+        }}
+        onChange={(e) => setSearchQuery(e.target.value)}
+        onKeyDown={searchSubject}
+      /> */}
+
+      <Paper sx={{ width: '100%', mb: 1 }}>
+        <TableContainer>
+          <Table sx={{ minWidth: 650 }} aria-label="simple table">
+            <TableHeaders columns={tableColumns} />
+            <TableBody>
+              {subjectsList.map((subject, key) => (
+                <TableRow hover key={key}>
+                  <TableCell>{subject['subject_code']}</TableCell>
+                  <TableCell>{subject['subject_name']}</TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </TableContainer>
+
+        <TablePagination
+          component="div"
+          rowsPerPageOptions={[]}
+          count={count}
+          rowsPerPage={rowsPerPage}
+          page={page}
+          onPageChange={handleChangePage}
+        />
+      </Paper>
+    </>
   )
 }
 
