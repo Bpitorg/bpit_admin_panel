@@ -9,7 +9,11 @@ import {
 } from "@mui/material";
 import { useFormik } from "formik";
 import React, { useEffect, useState } from "react";
-import { ADD_STUDENT_URL, BRANCH_URL, COURSE_URL } from "../../../constants/apiEndpoints";
+import {
+  ADD_STUDENT_URL,
+  BRANCH_URL,
+  COURSE_URL,
+} from "../../../constants/apiEndpoints";
 import http_lib from "../../../http/http";
 import { addStudentSchema } from "../../../schemas/addStudentSchema";
 import "../style.css";
@@ -26,36 +30,36 @@ const styles = {
   },
 };
 
-
-
-const AddStudent = ({setLoader}) => {
-
+const AddStudent = ({ setLoader }) => {
   const initialValues = {
-  enrollment_number: "",
-  name: "",
-  section: "",
-  batch: "",
-  class_roll_number: "",
-  student_group: "",
-  student_phone_number: "",
-  student_email_id: "",
-  mother_name: "",
-  father_name: "",
-  parent_phone_number: "",
-  branch: "",
-  course: "",
-  file: "",
-  fileUploadInput: "",
-};
-
-  const [isFile, setIsFile] = useState(false);
+    enrollment_number: "",
+    name: "",
+    section: "",
+    batch: "",
+    class_roll_number: "",
+    student_group: "",
+    student_phone_number: "",
+    student_email_id: "",
+    mother_name: "",
+    father_name: "",
+    parent_phone_number: "",
+    branch: "",
+    course: "",
+    file: "",
+    fileUploadInput: "",
+  };
 
   const { values, errors, handleBlur, handleChange } = useFormik({
     initialValues: initialValues,
     validationSchema: addStudentSchema,
-
   });
-  const navigate = useNavigate()
+  const navigate = useNavigate();
+  const date = new Date();
+  const currYear = date.getFullYear();
+  const years = [];
+  for (let i = currYear - 5; i < currYear + 5; i++) {
+    years.push(i);
+  }
   const submittedData = {
     is_file: false,
     student_data: [
@@ -72,74 +76,70 @@ const AddStudent = ({setLoader}) => {
         father_name: values.father_name,
         parent_phone_number: values.parent_phone_number,
         branch: values.branch,
-        course: values.course
+        course: values.course,
       },
     ],
   };
   function handleSubmit(e) {
-    e.preventDefault();
-    setLoader(true)
+    setLoader(true);
     http_lib
       .post(ADD_STUDENT_URL, submittedData)
       .then(() => {
         navigate("/home/students");
       })
       .catch((err) => {
-        console.log(err.response.data);
+        setLoader(false)
       });
-      setLoader(false)
-    console.log(values)
+    setLoader(false);
   }
   const [courseList, setCourseList] = useState([]);
   const [branchList, setBranchList] = useState([]);
   const [filesToUpload, setFilesToUpload] = useState([]);
 
   useEffect(() => {
+    //Get Course List
+    setLoader(true);
     http_lib
       .get(COURSE_URL)
       .then((res) => {
         const courseData = res.data;
         setCourseList(courseData);
       })
-      .catch((err) => console.log(err));
+      .catch((err) => setLoader(false));
+    setLoader(false);
+
+    //Get Branch List
+    setLoader(true);
     http_lib
       .get(BRANCH_URL)
       .then((res) => {
         const branchData = res.data;
         setBranchList(branchData);
       })
-      .catch((err) => console.log(err));
+      .catch((err) => setLoader(false));
+    setLoader(false);
   }, []);
 
   let formData = new FormData();
 
   const handleFormChange = (event) => {
     setFilesToUpload(event.target.files[0]);
-    console.log(filesToUpload);
-    if(event.target && event.target.files[0])
-    {
-      formData.append('file', event.target.files[0])
-    }
-  };
-  const fileData = {
-    is_file: true,
-    file: formData,
   };
 
   const fileUploadHandler = (e) => {
-    e.preventDefault();
-    console.log(filesToUpload)
     setLoader(true);
+    formData.append("is_file", true);
+    formData.append("file", filesToUpload);
     http_lib
-      .post(ADD_STUDENT_URL, fileData)
+      .post(ADD_STUDENT_URL, formData)
       .then(() => {
         navigate("/home/students");
       })
       .catch((err) => {
-        console.log(err.response.data);
+        setLoader(false);
       });
     setLoader(false);
-  }
+  };
   return (
     <form onSubmit={handleSubmit}>
       <div className="row">
@@ -224,14 +224,12 @@ const AddStudent = ({setLoader}) => {
             onBlur={handleBlur}
             onChange={handleChange}
           >
-            <MenuItem value={"2020"}>2020</MenuItem>
-            <MenuItem value={"2021"}>2021</MenuItem>
-            <MenuItem value={"2022"}>2022</MenuItem>
-            <MenuItem value={"2023"}>2023</MenuItem>
-            <MenuItem value={"2024"}>2024</MenuItem>
-            <MenuItem value={"2025"}>2025</MenuItem>
-            <MenuItem value={"2026"}>2026</MenuItem>
-            <MenuItem value={"2027"}>2027</MenuItem>
+            {years &&
+              years.map((year) => (
+                <MenuItem value={year} key={year}>
+                  {year}
+                </MenuItem>
+              ))}
           </Select>
           <p className="errorText">{errors.batch}</p>
         </FormControl>
@@ -379,11 +377,15 @@ const AddStudent = ({setLoader}) => {
       >
         SUBMIT
       </Button>
-      <div style={{ margin: "1rem", background: "red" }}>{ }</div>
-      <div style={{ margin: "1rem", background: "green" }}>{ }</div>
+      <div style={{ margin: "1rem", background: "red" }}>{}</div>
+      <div style={{ margin: "1rem", background: "green" }}>{}</div>
       <Divider orientation="horizontal" flexItem>
-        OR, UPLOAD FILES
+        <h3>OR</h3>
       </Divider>
+      <div style={{ textAlign: "center" }}>
+        <u>UPLOAD FILE</u>
+      </div>
+      <br />
       <div
         style={{
           display: "flex",
