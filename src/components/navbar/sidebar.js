@@ -8,6 +8,7 @@ import ListItemText from '@mui/material/ListItemText';
 import ListItem from '@mui/material/ListItem';
 // import DashboardIcon from '@mui/icons-material/Dashboard';
 import PeopleIcon from '@mui/icons-material/People';
+import LibraryBooksIcon from '@mui/icons-material/LibraryBooks';
 import Toolbar from '@mui/material/Toolbar';
 import IconButton from '@mui/material/IconButton';
 // import BarChartIcon from '@mui/icons-material/BarChart';
@@ -97,6 +98,7 @@ const mainListItems = (
   <React.Fragment>
     {/* <ListItemLink to="dashboard" primary="Dashboard" icon={<DashboardIcon />} /> */}
     <ListItemLink to="students" primary="Students" icon={<PeopleIcon />} />
+    <ListItemLink to="subjects" primary="Subjects" icon={<LibraryBooksIcon />} />
     {/* <ListItemLink to="faculty" primary="Faculty" icon={<BarChartIcon />} /> */}
   </React.Fragment>
 );
