@@ -429,7 +429,7 @@ const AddStudent = ({ setLoader }) => {
                 style={styles.button}
                 onClick={fileUploadHandler}
               >
-                Upload
+                Upload File
               </Button>
             </div>
           )}
