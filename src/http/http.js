@@ -1,5 +1,5 @@
 import axios from "axios";
-import RequestInterceptor from "./request_interceptor";
+import RequestInterceptor from "./requestInterceptor";
 
 const http_lib = axios.create({})
 

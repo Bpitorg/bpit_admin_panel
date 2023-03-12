@@ -6,13 +6,13 @@ import TableContainer from '@mui/material/TableContainer';
 import TableRow from '@mui/material/TableRow';
 import TablePagination from '@mui/material/TablePagination';
 import Paper from '@mui/material/Paper';
-import { SUBJECTS_URL } from '../../../constants/api_endpoints';
 import http_lib from '../../../http/http';
 import { rowsPerPage } from '../../../constants/constants';
 import TableHeaders from '../../common/tableHeaders';
 // import TextField from '@mui/material/TextField';
 // import SearchIcon from '@mui/icons-material/Search';
 // import IconButton from '@mui/material/IconButton';
+import { SUBJECTS_URL } from '../../../constants/apiEndpoints';
 
 function ListSubjects({ setLoader }) {
   const [subjectsList, setSubjectsList] = useState([])

@@ -14,7 +14,7 @@ import SettingsIcon from "@mui/icons-material/Settings";
 import { grey } from "@mui/material/colors";
 import { useNavigate } from "react-router-dom";
 import http_lib from "../../http/http";
-import { LOGOUT_URL } from "../../constants/api_endpoints";
+import { LOGOUT_URL } from "../../constants/apiEndpoints";
 
 const drawerWidth = 240;
 
@@ -50,13 +50,14 @@ export default function Bar(props) {
   }
 
   function handleLogout() {
+
     props.setLoader(true)
     http_lib
       .get(LOGOUT_URL)
       .then((res) => {
-        props.setLoader(false)
-        localStorage.clear();
         navigate("/login");
+        localStorage.clear();
+        props.setLoader(false)
       })
       .catch((err) => {
         props.setLoader(false)

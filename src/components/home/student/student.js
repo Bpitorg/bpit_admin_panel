@@ -2,6 +2,7 @@ import React from 'react';
 import { Grid, Paper, Tab, Divider } from '@mui/material';
 import { TabPanel, TabContext, TabList } from '@mui/lab';
 import PersonAddAlt1Icon from '@mui/icons-material/PersonAddAlt1';
+import AddStudent from './addStudent';
 // import ListAltIcon from '@mui/icons-material/ListAlt';
 // import ListStudent from './listStudent';
 // import StudentsData from './StudentsData';
@@ -23,7 +24,7 @@ export default function Student({ setLoader }) {
           </TabList>
           <Divider />
           {/* <TabPanel value='1'><ListStudent /></TabPanel> */}
-          <TabPanel value='1'>1</TabPanel>
+          <TabPanel value='1'><AddStudent setLoader={setLoader}/></TabPanel>
         </TabContext>
       </Paper>
     </Grid>
