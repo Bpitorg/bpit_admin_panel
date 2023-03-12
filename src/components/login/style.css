@@ -1,4 +1,4 @@
-.row {
+/* .row {
     margin: auto 1rem;
     display: flex;
     flex-direction: row;
@@ -6,21 +6,22 @@
     justify-content: space-between;
     flex-grow: 1;
 }
-.errorText{
+
+.errorText {
     color: red;
-        margin: 0;
-        font-size: .8rem;
-        padding-left: .5rem;
+    margin: 0;
+    font-size: .8rem;
+    padding-left: .5rem;
 }
 
 .css-1cxv2pl-MuiPaper-root {
     background-color: black !important;
 }
 
-.uploadFile{
+.uploadFile {
     display: flex;
-        flex-direction: row;
-        background: rgb(131, 188, 234);
+    flex-direction: row;
+    background: rgb(131, 188, 234);
 }
 
 .css-ibczwg-MuiPaper-root {
@@ -42,4 +43,4 @@
     .row {
         flex-direction: column;
     }
-}
+} */
