@@ -7,7 +7,7 @@ import AddStudent from './addStudent';
 // import ListStudent from './listStudent';
 // import StudentsData from './StudentsData';
 
-export default function Student({ setLoader }) {
+function Student({ setLoader }) {
   const [value, setValue] = React.useState('1');
 
   const handleChange = (event, newValue) => {
@@ -24,9 +24,11 @@ export default function Student({ setLoader }) {
           </TabList>
           <Divider />
           {/* <TabPanel value='1'><ListStudent /></TabPanel> */}
-          <TabPanel value='1'><AddStudent setLoader={setLoader}/></TabPanel>
+          <TabPanel value='1'><AddStudent setLoader={setLoader} /></TabPanel>
         </TabContext>
       </Paper>
     </Grid>
   )
 }
+
+export default Student;

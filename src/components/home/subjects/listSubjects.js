@@ -9,10 +9,10 @@ import Paper from '@mui/material/Paper';
 import http_lib from '../../../http/http';
 import { rowsPerPage } from '../../../constants/constants';
 import TableHeaders from '../../common/tableHeaders';
+import { SUBJECTS_URL } from '../../../constants/apiEndpoints';
 // import TextField from '@mui/material/TextField';
 // import SearchIcon from '@mui/icons-material/Search';
 // import IconButton from '@mui/material/IconButton';
-import { SUBJECTS_URL } from '../../../constants/apiEndpoints';
 
 function ListSubjects({ setLoader }) {
   const [subjectsList, setSubjectsList] = useState([])

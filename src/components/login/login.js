@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { useEffect, useState } from 'react';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -11,8 +11,11 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import http_lib from '../../http/http';
 import { useNavigate } from 'react-router-dom'
-import './style.css';
 import { LOGIN_URL } from '../../constants/apiEndpoints';
+import { useFormik } from 'formik';
+import { LoginSchema } from '../../schemas/loginSchema';
+import './style.css';
+
 function Copyright(props) {
   return (
     <Typography variant="body2" color="text.secondary" align="center" {...props}>
@@ -33,31 +36,36 @@ function setCredentials(data) {
 }
 
 export default function Login({ setLoader }) {
-  var [error, setError] = React.useState('');
-  let navigate = useNavigate();
+  const [error, setError] = useState('');
+  const navigate = useNavigate();
 
-  React.useEffect(() => {
+  const { handleSubmit, handleChange, values, touched, errors } = useFormik({
+    initialValues: {
+      email: '',
+      password: ''
+    },
+    validationSchema: LoginSchema,
+    onSubmit: ({ email, password }) => {
+      setLoader(true)
+      http_lib.post(LOGIN_URL, { email, password })
+        .then(res => {
+          setCredentials(res.data)
+          setLoader(false);
+          navigate('/home')
+        })
+        .catch(err => {
+          setLoader(false)
+          console.log(err.response.data)
+          setError(JSON.stringify(err.response.data))
+        })
+    }
+  })
+
+  useEffect(() => {
     if (localStorage.getItem('token')) {
-      navigate('/home/dashboard')
+      navigate('/home/')
     }
   }, [navigate])
-
-  function handleSubmit(event) {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    setLoader(true)
-    http_lib.post(LOGIN_URL, data)
-      .then(res => {
-        setCredentials(res.data)
-        setLoader(false);
-        navigate('/home')
-      })
-      .catch(err => {
-        setLoader(false)
-        console.log(err.response.data)
-        setError(JSON.stringify(err.response.data))
-      })
-  };
 
   return (
     <>
@@ -76,7 +84,18 @@ export default function Login({ setLoader }) {
             backgroundPosition: "center",
           }}
         />
-        <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
+        <Grid
+          item
+          xs={12}
+          sm={8}
+          md={5}
+          component={Paper}
+          elevation={6}
+          square
+          display="flex"
+          alignItems="center"
+          justifyContent='center'
+        >
           <Box
             sx={{
               my: 8,
@@ -92,6 +111,7 @@ export default function Login({ setLoader }) {
             <Typography component="h1" variant="h5">
               Sign in
             </Typography>
+
             <Box
               component="form"
               noValidate
@@ -102,21 +122,25 @@ export default function Login({ setLoader }) {
                 margin="normal"
                 required
                 fullWidth
-                id="email"
-                label="Email Address"
-                name="email"
-                autoComplete="email"
                 autoFocus
+                label="Email"
+                name='email'
+                onChange={handleChange}
+                value={values.email}
+                error={touched.email && errors.email}
+                helperText={touched.email && errors.email ? errors.email : ''}
               />
               <TextField
                 margin="normal"
                 required
                 fullWidth
-                name="password"
                 label="Password"
                 type="password"
-                id="password"
-                autoComplete="current-password"
+                name='password'
+                onChange={handleChange}
+                value={values.password}
+                error={touched.password && errors.password}
+                helperText={touched.password && errors.password ? errors.password : ''}
               />
               <Button
                 type="submit"
@@ -126,20 +150,21 @@ export default function Login({ setLoader }) {
               >
                 Sign In
               </Button>
-              <Typography sx={{ color: "warning.main" }}>{error}</Typography>
+              <Typography sx={{ color: "error.main" }}>{error}</Typography>
 
-              <Grid container>
+              {/* <Grid container>
                 <Grid item xs>
                   <Link href="#" variant="body2">
                     Forgot password?
                   </Link>
                 </Grid>
-                {/* <Grid item>
+                <Grid item>
                   <Link href="#" variant="body2">
                     {"Don't have an account? Sign Up"}
                   </Link>
-                </Grid> */}
-              </Grid>
+                </Grid>
+              </Grid> */}
+
               <Copyright sx={{ mt: 5 }} />
             </Box>
           </Box>
