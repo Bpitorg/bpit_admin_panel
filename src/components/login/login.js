@@ -13,7 +13,7 @@ import http_lib from '../../http/http';
 import { useNavigate } from 'react-router-dom'
 import { LOGIN_URL } from '../../constants/apiEndpoints';
 import { useFormik } from 'formik';
-import { LoginSchema } from '../../schemas/loginSchema';
+import { LoginInitialValues, LoginSchema } from '../../schemas/loginSchema';
 import './style.css';
 
 function Copyright(props) {
@@ -40,10 +40,7 @@ export default function Login({ setLoader }) {
   const navigate = useNavigate();
 
   const { handleSubmit, handleChange, values, touched, errors } = useFormik({
-    initialValues: {
-      email: '',
-      password: ''
-    },
+    initialValues: LoginInitialValues,
     validationSchema: LoginSchema,
     onSubmit: ({ email, password }) => {
       setLoader(true)

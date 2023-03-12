@@ -1,19 +1,23 @@
-import React from 'react'
+import React, { useRef, useState } from 'react'
 import { Button, Paper, Typography } from '@mui/material';
 import Divider from '@mui/material/Divider';
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 import DeleteIcon from '@mui/icons-material/Delete';
 import IconButton from '@mui/material/IconButton';
 import Grid from '@mui/material/Grid';
-import './styles.css'
+import './styles.css';
+import http_lib from '../../../http/http';
+import { useNavigate } from 'react-router-dom';
 
-function FileUploader({ setFile, sampleFileLink, instructions }) {
-  const [fileName, setFileName] = React.useState('')
-  const [uploaded, setUploaded] = React.useState(false)
+function FileUploader({ setLoader, sampleFileLink, url }) {
+  const [fileName, setFileName] = useState('')
+  const [file, setFile] = useState(null)
+  const [uploaded, setUploaded] = useState(false)
+  const navigate = useNavigate()
   // drag state
-  const [dragActive, setDragActive] = React.useState(false);
+  const [dragActive, setDragActive] = useState(false);
   // ref
-  const inputRef = React.useRef(null);
+  const inputRef = useRef(null);
 
   // handle drag events
   const handleDrag = function (e) {
@@ -60,12 +64,29 @@ function FileUploader({ setFile, sampleFileLink, instructions }) {
     inputRef.current.value = ''
   }
 
+  const handleSubmit = (e) => {
+    setLoader(true)
+    const formData = new FormData()
+    formData.append("is_file", true);
+    formData.append("file", file);
+    e.preventDefault()
+    http_lib.post(url, formData)
+      .then(() => {
+        setLoader(false);
+        navigate("/home/students");
+      })
+      .catch((err) => {
+        console.log(err)
+        setLoader(false);
+      });
+  }
+
   return (
     <Paper variant='outlined'>
       <Grid container p={3}>
 
         <Grid item xs>
-          <form id="form-file-upload" onDragEnter={handleDrag} onSubmit={(e) => e.preventDefault()}>
+          <form id="form-file-upload" onDragEnter={handleDrag} onSubmit={handleSubmit}>
             <input ref={inputRef} type="file" id="input-file-upload" onChange={handleChange} accept='.xls,.xlsx' />
             <label id="label-file-upload" htmlFor="input-file-upload">
 
@@ -77,12 +98,13 @@ function FileUploader({ setFile, sampleFileLink, instructions }) {
                       <Typography>
                         {fileName} <IconButton onClick={deleteFile}> <DeleteIcon /> </IconButton>
                       </Typography>
+                      <Button fullWidth type='submit' variant='contained' sx={{ my: 3 }} >Upload</Button>
                     </>
                     :
                     <>
                       <Typography>Drag and drop your file</Typography>
                       <Divider sx={{ my: 3 }}>OR</Divider>
-                      <Button variant='contained' onClick={onButtonClick}>Upload File</Button>
+                      <Button variant='contained' onClick={onButtonClick}>Browse File</Button>
                       <br />
                       <Button disabled size='small' sx={{ mt: 1 }}>Supported file formats .xls, xlsx</Button>
                     </>
@@ -106,8 +128,8 @@ function FileUploader({ setFile, sampleFileLink, instructions }) {
           </ul>
           <Typography variant='h6'>Download sample file from <a href={sampleFileLink}>here</a> </Typography>
         </Grid>
-
       </Grid>
+
     </Paper >
   );
 }
