@@ -135,3 +135,16 @@ function FileUploader({ setLoader, sampleFileLink, url }) {
 }
 
 export default FileUploader;
+
+  // file: Yup.mixed()
+  //   .required("Please select a file")
+  //   .test(
+  //     "fileFormat",
+  //     "Invalid file format",
+  //     (value) =>
+  //       value &&
+  //       [
+  //         "application/vnd.ms-excel",
+  //         "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+  //       ].includes(value.type)
+  //   ),

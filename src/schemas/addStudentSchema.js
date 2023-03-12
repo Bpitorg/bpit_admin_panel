@@ -14,18 +14,6 @@ export const AddStudentSchema = Yup.object({
   student_phone_number: Yup.number().min(10).required("Please enter the Student's Phone Number!"),
   student_email_id: Yup.string().email().required("Please enter the Email!"),
   parent_phone_number: Yup.number().min(10).required("Please enter the Parent's Phone Number!"),
-  file: Yup.mixed()
-    .required("Please select a file")
-    .test(
-      "fileFormat",
-      "Invalid file format",
-      (value) =>
-        value &&
-        [
-          "application/vnd.ms-excel",
-          "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
-        ].includes(value.type)
-    ),
 });
 
 export const StudentInitialValues = {
